@@ -19,10 +19,10 @@ CREATE TABLE "models" (
 );
 
 -- Needs SQLite 3.7 or newer
-INSERT INTO "models" VALUES
-  (0, "BBB100-1"),
-  (0, "BBB100-2"),
-  (1, "BBD100-1")
+INSERT INTO "models" ("familyId", "name") VALUES
+  (1, "BBB100-1"),
+  (1, "BBB100-2"),
+  (2, "BBD100-1")
 ;
 
 CREATE TABLE "devices" (
@@ -33,9 +33,9 @@ CREATE TABLE "devices" (
 );
 
 -- Needs SQLite 3.7 or newer
-INSERT INTO "devices" VALUES
-  ("PRD-63117-011", 1, "Unlocked EMEA"),
-  ("PRD-63116-001", 0, "Unlocked USA")
+INSERT INTO "devices" ("ref", "modelId", "name") VALUES
+  ("PRD-63117-011", 2, "Unlocked EMEA"),
+  ("PRD-63116-001", 1, "Unlocked USA")
 ;
 
 -- we only care about the first file for now
@@ -53,7 +53,7 @@ CREATE TABLE "updates" (
   "file_size" INTEGER, -- size of first file
   "file_sha1" TEXT,    -- SHA1 checksum of first file
   "type" TEXT,     -- FULL or OTA
-  "note" TEXT,     -- some note for this file (optional)
+  "note" TEXT      -- some note for this file (optional)
 );
 
 -- Maps update files to devices
