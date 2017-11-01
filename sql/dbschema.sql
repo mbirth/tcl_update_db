@@ -37,9 +37,16 @@ INSERT INTO "devices" VALUES
   ("PRD-63116-001", 0, "Unlocked USA")
 ;
 
-CREATE TABLE "otas" (
-  "otaId" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "fv" TEXT,     -- e.g. AAQ302
-  "sha1" TEXT    -- SHA1 checksum of OTA file
+CREATE TABLE "updates" (
+  "updateId" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "fv" TEXT,       -- version, e.g. AAQ302
+  "sha1" TEXT,     -- SHA1 checksum of file
+  "type" TEXT,     -- FULL or OTA
+  "note" TEXT,     -- some note for this file (optional)
 );
 
+-- Maps update files to devices
+CREATE TABLE "update_map" (
+  "deviceId" INTEGER REFERENCES "devices" ("deviceId"),
+  "updateId" INTEGER REFERENCES "updates" ("updateId")
+);
