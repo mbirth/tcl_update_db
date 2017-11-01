@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<GOTU>
+  <UPDATE_DESC>7</UPDATE_DESC>
+  <ENCODING_ERROR>0</ENCODING_ERROR>
+  <CUREF>PRD-63117-011</CUREF>
+  <VERSION>
+    <TYPE>4</TYPE>
+    <FV>AAA000</FV>
+    <TV>AAP638</TV>
+    <SVN>20171101_142001</SVN>
+    <RELEASE_INFO>
+      <year>2017</year>
+      <month>11</month>
+      <day>01</day>
+      <hour>14</hour>
+      <minute>17</minute>
+      <second>57</second>
+      <timezone>GMT 8</timezone>
+      <publisher>jin.zeng.hz</publisher>
+    </RELEASE_INFO>
+  </VERSION>
+  <FIRMWARE>
+    <FW_ID>276021</FW_ID>
+    <FILESET_COUNT>1</FILESET_COUNT>
+    <FILESET>
+      <FILE>
+        <FILENAME>bbry_qc8953_sfi-user-production_signed-AAP638.zip</FILENAME>
+        <FILE_ID>280740</FILE_ID>
+        <SIZE>2844289143</SIZE>
+        <CHECKSUM>33444510a916817743ca9a1ba360c662a4d7c16c</CHECKSUM>
+        <FILE_VERSION>8</FILE_VERSION>
+        <INDEX>0</INDEX>
+      </FILE>
+    </FILESET>
+  </FIRMWARE>
+  <DESCRIPTION/>
+</GOTU>

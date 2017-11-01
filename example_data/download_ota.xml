@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<GOTU>
+  <FILE_LIST>
+    <FILE>
+      <FILE_ID>277516</FILE_ID>
+      <DOWNLOAD_URL>/ce570ddc079e2744558f191895e524d02a60476f/d9aa80e05f631c6cfe5118d3e9f2166e5fd76e9b/269900/277516</DOWNLOAD_URL>
+    </FILE>
+  </FILE_LIST>
+  <SLAVE_LIST>
+    <SLAVE>g2slave-ap-north-01.tctmobile.com</SLAVE>
+    <SLAVE>g2slave-ap-north-01.tctmobile.com</SLAVE>
+    <SLAVE>g2slave-eu-west-01.tctmobile.com</SLAVE>
+    <SLAVE>g2slave-eu-west-01.tctmobile.com</SLAVE>
+    <SLAVE>g2slave-us-east-01.tctmobile.com</SLAVE>
+    <SLAVE>g2slave-us-east-01.tctmobile.com</SLAVE>
+  </SLAVE_LIST>
+</GOTU>

@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<GOTU>
+  <UPDATE_DESC>##version##</UPDATE_DESC>
+  <ENCODING_ERROR>0</ENCODING_ERROR>
+  <CUREF>PRD-63117-011</CUREF>
+  <VERSION>
+    <TYPE>2</TYPE>
+    <FV>AAM481</FV>
+    <TV>AAO472</TV>
+    <SVN>TMPSVN</SVN>
+    <RELEASE_INFO>
+      <year>2017</year>
+      <month>09</month>
+      <day>23</day>
+      <hour>09</hour>
+      <minute>09</minute>
+      <second>38</second>
+      <timezone>GMT+8</timezone>
+      <publisher>jin.zeng.hz</publisher>
+    </RELEASE_INFO>
+  </VERSION>
+  <FIRMWARE>
+    <FW_ID>269900</FW_ID>
+    <FILESET_COUNT>1</FILESET_COUNT>
+    <FILESET>
+      <FILE>
+        <FILENAME>bbry_qc8953_sfi-user-ota-bbb100emea-production_signed-AAM481-AAO472.zip</FILENAME>
+        <FILE_ID>277516</FILE_ID>
+        <SIZE>559184901</SIZE>
+        <CHECKSUM>cd93a0afce067a6635caf5352dbb2a0d690d52d2</CHECKSUM>
+        <FILE_VERSION>1</FILE_VERSION>
+        <INDEX>0</INDEX>
+      </FILE>
+    </FILESET>
+  </FIRMWARE>
+  <SPOP_LIST>
+    <SPOP_NB>0</SPOP_NB>
+  </SPOP_LIST>
+  <DESCRIPTION/>
+</GOTU>
