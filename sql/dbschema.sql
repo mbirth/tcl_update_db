@@ -47,7 +47,7 @@ CREATE TABLE "updates" (
   "svn" TEXT,      -- version info from <SVN> field
   "pubDate" INTEGER,   -- published date
   "publisher" TEXT,    -- publisher
-  "fwId" TEXT,     -- <FW_ID>
+  "fwId" TEXT,     -- <FW_ID> (CHANGES FOR THE SAME FILE_ID!!!) MAYBE MOVE TO update_map
   "file_id" TEXT,      -- <FILE_ID> of first file
   "file_name" TEXT,    -- filename of first file
   "file_size" INTEGER, -- size of first file
@@ -59,5 +59,6 @@ CREATE TABLE "updates" (
 -- Maps update files to devices
 CREATE TABLE "update_map" (
   "deviceId" INTEGER REFERENCES "devices" ("deviceId"),
-  "updateId" INTEGER REFERENCES "updates" ("updateId")
+  "updateId" INTEGER REFERENCES "updates" ("updateId"),
+  "seenDate" INTEGER   -- timestamp when this record was added
 );
