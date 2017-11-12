@@ -27,10 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Input length is " . strlen($input_xml) . " Bytes." . PHP_EOL;
     #echo $input_xml . PHP_EOL;
 
+    // Write backup copy (for maybe re-parsing later)
+    $bkup_dir = __DIR__ . '/data/';
+    if (!is_dir($bkup_dir)) {
+        mkdir($bkup_dir);
+    }
+    $bkup_filename = $bkup_dir . sprintf('%f-%04x.xml', microtime(true), rand(0, 65535));
+    file_put_contents($bkup_filename, $input_xml);
 
-    // TODO: Check if it's XML
-    //       If so: Store a copy for re-parsing (or to print out and hang up on a wall)
-    //       Then parse XML into database
+    // TODO: Parse XML into database
+
     exit;
 }
 
