@@ -1,6 +1,6 @@
 <?php
 
-require_once 'lib/autoloader.php';
+require_once __DIR__ . '/lib/autoloader.php';
 
 use \TclUpdates\XmlParser;
 
