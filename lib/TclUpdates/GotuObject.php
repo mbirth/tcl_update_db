@@ -17,10 +17,7 @@ class GotuObject
             return false;
         }
         $g = new self();
-        $g->attrs['type'] = $xp->getAttr('type');
-        $g->attrs['fv']   = $xp->getAttr('fv');
-        $g->attrs['tv']   = $xp->getAttr('tv');
-        $g->attrs['time'] = $xp->getReleaseTime();
+        $g->attrs = $xp->getAttrs();
         return $g;
     }
 }

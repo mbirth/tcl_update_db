@@ -17,11 +17,11 @@ class XmlParser
         'publisher' => '//VERSION/RELEASE_INFO/publisher',
         'fw_id' => '//FIRMWARE/FW_ID',
         'fileset_count' => '//FIRMWARE/FILESET_COUNT',
-        'filename' => '//FILESET/FILE[0]/FILENAME',
-        'file_id' => '//FILESET/FILE[0]/FILE_ID',
-        'file_size' => '//FILESET/FILE[0]/SIZE',
-        'file_chksum' => '//FILESET/FILE[0]/CHECKSUM',
-        'file_version' => '//FILESET/FILE[0]/FILE_VERSION',
+        'filename' => '//FILESET/FILE[1]/FILENAME',
+        'file_id' => '//FILESET/FILE[1]/FILE_ID',
+        'file_size' => '//FILESET/FILE[1]/SIZE',
+        'file_chksum' => '//FILESET/FILE[1]/CHECKSUM',
+        'file_version' => '//FILESET/FILE[1]/FILE_VERSION',
         'description_en' => '//DESCRIPTION/en',
         'description_ja' => '//DESCRIPTION/ja',
         'description_zh' => '//DESCRIPTION/zh',
@@ -58,6 +58,16 @@ class XmlParser
         $xpath = $this->attr_map[$attr];
         $node = $this->getXPathValue($xpath);
         return $node;
+    }
+
+    public function getAttrs()
+    {
+        $attrs = array();
+        foreach ($this->attr_map as $key => $xpath) {
+            $attrs[$key] = $this->getXPathValue($xpath);
+        }
+        $attrs['time'] = $this->getReleaseTime();
+        return $attrs;
     }
 
     public function getReleaseTime()
