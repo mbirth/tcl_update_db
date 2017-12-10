@@ -5,10 +5,12 @@ require_once __DIR__ . '/lib/autoloader.php';
 
 use \TclUpdates\GotuObject;
 use \TclUpdates\XmlParser;
+use \TclUpdates\SQLiteWriter;
 
 $bkup_dir = __DIR__ . '/data/';
 
 $file_list = glob($bkup_dir . '*.xml');
+$sqlw = new SQLiteWriter();
 
 foreach ($file_list as $file) {
     $filename = basename($file);
@@ -26,4 +28,5 @@ foreach ($file_list as $file) {
     echo 'Processing ' . $filename . PHP_EOL;
     $g = GotuObject::fromXmlParser($xp);
     print_r($g);
+    $sqlw->addGotu($g);
 }
