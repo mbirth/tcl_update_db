@@ -32,6 +32,27 @@ class XmlParser
         $this->dom = new \DOMDocument();
     }
 
+    public function __isset($attr)
+    {
+        if ($attr == 'time') {
+            return true;
+        }
+        return array_key_exists($attr, $this->attr_map);
+    }
+
+    public function __get($attr)
+    {
+        if ($attr === 'time') {
+            return $this->getReleaseTime();
+        }
+        if (!array_key_exists($attr, $this->attr_map)) {
+            return null;
+        }
+        $xpath = $this->attr_map[$attr];
+        $node = $this->getXPathValue($xpath);
+        return $node;
+    }
+
     public function loadXMLFromString($xml)
     {
         $xml_ok = $this->dom->loadXML($xml, LIBXML_NOENT);
@@ -50,23 +71,13 @@ class XmlParser
         return true;
     }
 
-    public function getAttr($attr)
-    {
-        if (!isset($this->attr_map[$attr])) {
-            return false;
-        }
-        $xpath = $this->attr_map[$attr];
-        $node = $this->getXPathValue($xpath);
-        return $node;
-    }
-
     public function getAttrs()
     {
         $attrs = array();
-        foreach ($this->attr_map as $key => $xpath) {
-            $attrs[$key] = $this->getXPathValue($xpath);
+        foreach (array_keys($this->attr_map) as $key) {
+            $attrs[$key] = $this->__get($key);
         }
-        $attrs['time'] = $this->getReleaseTime();
+        $attrs['time'] = $this->__get('time');
         return $attrs;
     }
 

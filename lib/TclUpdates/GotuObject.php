@@ -11,10 +11,28 @@ class GotuObject
 
     }
 
+    public function __isset($attr)
+    {
+        return array_key_exists($attr, $this->attrs);
+    }
+
+    public function __get($attr)
+    {
+        if (!$this->__isset($attr)) {
+            return null;
+        }
+        return $this->attrs[$attr];
+    }
+
+    public function getAttrs()
+    {
+        return $this->attrs;
+    }
+    
     public static function fromXmlParser(XmlParser $xp)
     {
         if (!$xp->validateGOTU()) {
-            return false;
+            return null;
         }
         $g = new self();
         $g->attrs = $xp->getAttrs();
