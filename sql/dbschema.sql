@@ -38,6 +38,16 @@ INSERT INTO "devices" ("ref", "modelId", "name") VALUES
   ("PRD-63116-001", 1, "Unlocked USA")
 ;
 
+CREATE TABLE "files" (
+  "sha1" TEXT UNIQUE PRIMARY KEY,   -- checksum of file
+  "file_name" TEXT,      -- filename of file
+  "file_size" INTEGER,   -- size
+  "type" TEXT,           -- FULL(4) or OTA(2) update
+  "note" TEXT,           -- description of file (optional)
+  "published_first" INTEGER,   -- stamp of earliest pubdate
+  "published_last" INTEGER     -- stamp of latest pubdate
+);
+
 -- we only care about the first file for now
 -- a separate "files" table might get introduced later
 CREATE TABLE "updates" (
@@ -49,11 +59,7 @@ CREATE TABLE "updates" (
   "publisher" TEXT,    -- publisher
   "fwId" TEXT,     -- <FW_ID> (CHANGES FOR THE SAME FILE_ID!!!) MAYBE MOVE TO update_map
   "file_id" TEXT,      -- <FILE_ID> of first file
-  "file_name" TEXT,    -- filename of first file
-  "file_size" INTEGER, -- size of first file
-  "file_sha1" TEXT,    -- SHA1 checksum of first file
-  "type" TEXT,     -- FULL or OTA
-  "note" TEXT      -- some note for this file (optional)
+  "file_sha1" TEXT     -- SHA1 checksum of first file
 );
 CREATE UNIQUE INDEX "index_updates" ON "updates" (
   "tv",
