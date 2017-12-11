@@ -28,5 +28,7 @@ foreach ($file_list as $file) {
     echo 'Processing ' . $filename . PHP_EOL;
     $g = GotuObject::fromXmlParser($xp);
     print_r($g);
-    $sqlw->addGotu($g);
+    if ($g->tv) {
+        $sqlw->addGotu($g);
+    }
 }

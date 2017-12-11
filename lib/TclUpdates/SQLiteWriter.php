@@ -19,7 +19,7 @@ class SQLiteWriter
     private function insertArray($table, $data)
     {
         $placeholders = array_fill(0, count($data), '?');
-        $sql = 'INSERT OR REPLACE INTO "' . $table . '" (' . implode(', ', array_keys($data)) . ') VALUES (' . implode(', ', $placeholders) . ')';
+        $sql = 'INSERT INTO "' . $table . '" (' . implode(', ', array_keys($data)) . ') VALUES (' . implode(', ', $placeholders) . ')';
         $stmt = $this->pdo->prepare($sql);
         $ok = $stmt->execute(array_values($data));
         return $ok;
@@ -27,7 +27,7 @@ class SQLiteWriter
 
     public function addGotu(GotuObject $g)
     {
-        $this->insertArray('updates', array(
+        $ok = $this->insertArray('updates', array(
             'tv' => $g->tv,
             'fv' => $g->fv,
             'svn' => $g->svn,
@@ -45,7 +45,11 @@ class SQLiteWriter
                 'zh' => $g->description_zh,
             ))
         ));
-        $key = $this->pdo->lastInsertId();
-        echo "Added entry " . $key . PHP_EOL;
+        if ($ok) {
+            $key = $this->pdo->lastInsertId();
+            echo "Added entry " . $key . PHP_EOL;
+        } else {
+            echo "FAILED inserting." . PHP_EOL;
+        }
     }
 }

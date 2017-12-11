@@ -55,6 +55,12 @@ CREATE TABLE "updates" (
   "type" TEXT,     -- FULL or OTA
   "note" TEXT      -- some note for this file (optional)
 );
+CREATE UNIQUE INDEX "index_updates" ON "updates" (
+  "tv",
+  "fv",
+  "fwId",
+  "file_id"
+);
 
 -- Maps update files to devices
 CREATE TABLE "update_map" (
