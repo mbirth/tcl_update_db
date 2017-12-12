@@ -35,7 +35,11 @@ class GotuObject
             return null;
         }
         $g = new self();
-        $g->attrs = $xp->getAttrs();
+        $attrs = $xp->getAttrs();
+        if ($attrs['fv'] == 'AAA000') {
+            $attrs['fv'] = null;
+        }
+        $g->attrs = $attrs;
         return $g;
     }
 }
