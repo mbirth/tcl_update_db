@@ -43,6 +43,8 @@ CREATE TABLE "files" (
   "file_name" TEXT,      -- filename of file
   "file_size" INTEGER,   -- size
   "type" TEXT,           -- FULL(4) or OTA(2) update
+  "fv" TEXT,             -- from version (only for OTA)
+  "tv" TEXT,             -- target version, e.g. AAQ302
   "note" TEXT,           -- description of file (optional)
   "published_first" INTEGER,   -- stamp of earliest pubdate
   "published_last" INTEGER     -- stamp of latest pubdate
@@ -52,18 +54,14 @@ CREATE TABLE "files" (
 -- a separate "files" table might get introduced later
 CREATE TABLE "updates" (
   "updateId" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "tv" TEXT,       -- target version, e.g. AAQ302
-  "fv" TEXT,       -- from version (only for OTA)
   "svn" TEXT,      -- version info from <SVN> field
   "pubDate" INTEGER,   -- published date
   "publisher" TEXT,    -- publisher
   "fwId" TEXT,     -- <FW_ID> (CHANGES FOR THE SAME FILE_ID!!!) MAYBE MOVE TO update_map
   "file_id" TEXT,      -- <FILE_ID> of first file
-  "file_sha1" TEXT     -- SHA1 checksum of first file
+  "file_sha1" TEXT REFERENCES "files" ("sha1")     -- SHA1 checksum of first file
 );
 CREATE UNIQUE INDEX "index_updates" ON "updates" (
-  "tv",
-  "fv",
   "fwId",
   "file_id"
 );

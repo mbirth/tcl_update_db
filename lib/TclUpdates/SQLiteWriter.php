@@ -14,6 +14,7 @@ class SQLiteWriter
         if ($this->pdo === false) {
             return $sqlerror;
         }
+        $this->pdo->exec('PRAGMA foreign_keys=on;');
     }
 
     private function insertArray($table, $data, $replace = false)
@@ -75,6 +76,8 @@ class SQLiteWriter
                 'sha1' => $file_arr['file_sha1'],
                 'file_name' => $file_arr['file_name'],
                 'file_size' => $file_arr['file_size'],
+                'fv' => $file_arr['fv'],
+                'tv' => $file_arr['tv'],
                 'type' => $file_arr['type'],
                 'note' => json_encode($note, JSON_UNESCAPED_UNICODE),
                 'published_first' => $pubFirst,
@@ -90,6 +93,8 @@ class SQLiteWriter
             'file_name' => $g->filename,
             'file_size' => $g->file_size,
             'type' => $g->type,
+            'fv' => $g->fv,
+            'tv' => $g->tv,
             'note' => array(
                 'en' => $g->description_en,
                 'ja' => $g->description_ja,
@@ -98,8 +103,6 @@ class SQLiteWriter
             'pubDate' => $g->time,
         ));
         $ok = $this->insertArray('updates', array(
-            'tv' => $g->tv,
-            'fv' => $g->fv,
             'svn' => $g->svn,
             'pubDate' => $g->time,
             'publisher' => $g->publisher,
