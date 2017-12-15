@@ -86,8 +86,11 @@ class SQLiteWriter
         }
     }
 
-    public function addGotu(GotuObject $g)
+    public function addGotu(GotuObject $g, $seenDate = false)
     {
+        if ($seenDate === false) {
+            $seenDate = gmdate('c');
+        }
         $this->addFile(array(
             'file_sha1' => $g->file_chksum,
             'file_name' => $g->filename,
@@ -103,10 +106,14 @@ class SQLiteWriter
             'pubDate' => $g->time,
         ));
         $ok = $this->insertArray('updates', array(
+            'curef' => $g->curef,
+            'update_desc' => $g->update_desc,
             'svn' => $g->svn,
+            'seenDate' => $seenDate,
             'pubDate' => $g->time,
             'publisher' => $g->publisher,
             'fwId' => $g->fw_id,
+            'num_files' => $g->fileset_count,
             'file_id' => $g->file_id,
             'file_sha1' => $g->file_chksum,
         ));

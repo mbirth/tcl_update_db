@@ -14,6 +14,8 @@ $sqlw = new SQLiteWriter();
 
 foreach ($file_list as $file) {
     $filename = basename($file);
+    $file_stamp = substr($filename, 0, strpos($filename, '.'));
+    $file_date = gmdate('c', intval($file_stamp));
     $data = file_get_contents($file);
     $xp = new XmlParser();
     $load_ok = $xp->loadXmlFromString($data);
@@ -27,8 +29,8 @@ foreach ($file_list as $file) {
     }
     echo 'Processing ' . $filename . PHP_EOL;
     $g = GotuObject::fromXmlParser($xp);
-    print_r($g);
+    //print_r($g);
     if ($g->tv) {
-        $sqlw->addGotu($g);
+        $sqlw->addGotu($g, $file_date);
     }
 }

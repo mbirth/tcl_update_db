@@ -54,21 +54,19 @@ CREATE TABLE "files" (
 -- a separate "files" table might get introduced later
 CREATE TABLE "updates" (
   "updateId" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "curef" TEXT,    -- PRD number
+  "update_desc" TEXT,
   "svn" TEXT,      -- version info from <SVN> field
+  "seenDate" INTEGER,  -- date added to db
   "pubDate" INTEGER,   -- published date
   "publisher" TEXT,    -- publisher
+  "num_files" INTEGER, -- number of files total
   "fwId" TEXT,     -- <FW_ID> (CHANGES FOR THE SAME FILE_ID!!!) MAYBE MOVE TO update_map
   "file_id" TEXT,      -- <FILE_ID> of first file
   "file_sha1" TEXT REFERENCES "files" ("sha1")     -- SHA1 checksum of first file
 );
 CREATE UNIQUE INDEX "index_updates" ON "updates" (
+  "curef",
   "fwId",
   "file_id"
-);
-
--- Maps update files to devices
-CREATE TABLE "update_map" (
-  "deviceId" INTEGER REFERENCES "devices" ("deviceId"),
-  "updateId" INTEGER REFERENCES "updates" ("updateId"),
-  "seenDate" INTEGER   -- timestamp when this record was added
 );
