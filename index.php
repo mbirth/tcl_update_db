@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/lib/autoloader.php';
 
+use \TclUpdates\GotuObject;
 use \TclUpdates\XmlParser;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
