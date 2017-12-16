@@ -18,3 +18,7 @@ td.ref {
 td.empty {
     color: silver;
 }
+
+tr:hover {
+    background-color: #ddd;
+}

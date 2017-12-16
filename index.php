@@ -35,7 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $bkup_filename = $bkup_dir . sprintf('%f-%04x.xml', microtime(true), rand(0, 65535));
     file_put_contents($bkup_filename, $input_xml);
 
-    // TODO: Parse XML into database
+    // Parse XML into database
+    $g = GotuObject::fromXmlParser($xp);
+    if ($g->tv) {
+        $result = $sqlw->addGotu($g, $file_date);
+        // I don't care if we can use the data or not. Maybe we can use it later (backup copy).
+    }
 
     exit;
 }
