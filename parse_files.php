@@ -27,10 +27,17 @@ foreach ($file_list as $file) {
         echo 'XML not valid in ' . $filename . '!' . PHP_EOL;
         continue;
     }
-    echo 'Processing ' . $filename . PHP_EOL;
+    echo 'Processing ' . $filename . ' ...';
     $g = GotuObject::fromXmlParser($xp);
     //print_r($g);
     if ($g->tv) {
-        $sqlw->addGotu($g, $file_date);
+        $result = $sqlw->addGotu($g, $file_date);
+        if ($result !== false) {
+            echo ' added as #' . $result . PHP_EOL;
+        } else {
+            echo ' NOT ADDED.' . PHP_EOL;
+        }
+    } else {
+        echo ' not a check XML' . PHP_EOL;
     }
 }

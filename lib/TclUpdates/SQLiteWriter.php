@@ -10,9 +10,9 @@ class SQLiteWriter
     public function __construct()
     {
         $this->dbFile = 'otadb.db3';
-        $this->pdo = new \PDO('sqlite:' . $this->dbFile, 0666, $sqlerror);
+        $this->pdo = new \PDO('sqlite:' . $this->dbFile);
         if ($this->pdo === false) {
-            return $sqlerror;
+            return false;
         }
         $this->pdo->exec('PRAGMA foreign_keys=on;');
     }
@@ -119,9 +119,8 @@ class SQLiteWriter
         ));
         if ($ok) {
             $key = $this->pdo->lastInsertId();
-            echo "Added entry " . $key . PHP_EOL;
-        } else {
-            echo "FAILED inserting." . PHP_EOL;
+            return $key;
         }
+        return false;
     }
 }
