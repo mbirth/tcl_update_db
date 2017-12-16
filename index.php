@@ -3,6 +3,7 @@
 require_once __DIR__ . '/lib/autoloader.php';
 
 use \TclUpdates\GotuObject;
+use \TclUpdates\SQLiteWriter;
 use \TclUpdates\XmlParser;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -39,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Parse XML into database
     $g = GotuObject::fromXmlParser($xp);
     if ($g->tv) {
+        $sqlw = new SQLiteWriter();
         $result = $sqlw->addGotu($g, $file_date);
         // I don't care if we can use the data or not. Maybe we can use it later (backup copy).
     }
