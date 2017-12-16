@@ -31,13 +31,13 @@ foreach ($allVars as $family => $models) {
         $allVersions = $db->getAllVersionsForModel($model);
         echo '<table><tbody>';
         foreach ($variants as $ref => $name) {
-            echo '<tr><td>' . $ref . '</td>';
+            echo '<tr><td class="ref">' . $ref . '</td>';
             $refVersions = $db->getAllVersionsForRef($ref);
             foreach ($allVersions as $v) {
                 if (in_array($v, $refVersions, true)) {
                     echo '<td>' . $v . '</td>';
                 } else {
-                    echo '<td class="empty">------</td>';
+                    echo '<td class="empty">- - -</td>';
                 }
             }
             echo '</tr>' . PHP_EOL;

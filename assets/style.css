@@ -1,9 +1,18 @@
+body {
+    font-family: sans-serif;
+}
+
 table td+td {
-    border-left: 1px dashed green;
+    border-left: 1px dashed silver;
+    text-align: center;
 }
 
 td {
     font-family: monospace;
+}
+
+td.ref {
+    font-weight: bold;
 }
 
 td.empty {
