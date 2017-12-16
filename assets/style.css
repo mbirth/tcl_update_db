@@ -1,0 +1,11 @@
+table td+td {
+    border-left: 1px dashed green;
+}
+
+td {
+    font-family: monospace;
+}
+
+td.empty {
+    color: silver;
+}

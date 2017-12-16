@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>BlackBerry/TCL Firmware List</title>
+    <link rel="stylesheet" href="assets/style.css"/>
 </head>
 <body>
 <?php
@@ -13,24 +14,37 @@ use \TclUpdates\SQLiteReader;
 $db = new SQLiteReader();
 
 $allVars = $db->getAllVariants();
+$unknowns = $db->getUnknownRefs();
+if (count($unknowns) > 0) {
+    $variants = array();
+    foreach ($unknowns as $uref) {
+        $variants[$uref] = '';
+    }
+    $allVars['Unknown'] = array(
+        'Variants' => $variants,
+    );
+}
 
 foreach ($allVars as $family => $models) {
     foreach ($models as $model => $variants) {
         echo '<h2>' . $family . ' ' . $model . '</h2>' . PHP_EOL;
-        echo '<table>';
+        $allVersions = $db->getAllVersionsForModel($model);
+        echo '<table><tbody>';
         foreach ($variants as $ref => $name) {
-            echo '<tr><td>' . $ref . '</td>' . '</tr>' . PHP_EOL;
+            echo '<tr><td>' . $ref . '</td>';
+            $refVersions = $db->getAllVersionsForRef($ref);
+            foreach ($allVersions as $v) {
+                if (in_array($v, $refVersions, true)) {
+                    echo '<td>' . $v . '</td>';
+                } else {
+                    echo '<td class="empty">------</td>';
+                }
+            }
+            echo '</tr>' . PHP_EOL;
         }
-        echo '</table>';
+        echo '</tbody></table>';
     }
 }
-print_r($db->getAllUpdates('PRD-63117-011', $db::BOTH));
-
-print_r($db->getLatestUpdate('PRD-63117-011', $db::BOTH));
-
-
-print_r($db->getUnknownPrds());
-
 ?>
 </body>
 </html>
