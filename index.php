@@ -40,7 +40,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 
-echo "Here is the normal page. " . $_SERVER['REQUEST_METHOD'];
-
-
-// TODO: Show statistics from database
+require_once 'index_main.php';
