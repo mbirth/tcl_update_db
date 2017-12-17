@@ -28,7 +28,7 @@ class GotuObject
     {
         return $this->attrs;
     }
-    
+
     public static function fromXmlParser(XmlParser $xp)
     {
         if (!$xp->validateGOTU()) {
@@ -39,6 +39,7 @@ class GotuObject
         if ($attrs['fv'] == 'AAA000') {
             $attrs['fv'] = null;
         }
+        $attrs['curef'] = strtoupper($attrs['curef']);
         $g->attrs = $attrs;
         return $g;
     }
