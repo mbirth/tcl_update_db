@@ -22,3 +22,7 @@ td.empty {
 tr:hover {
     background-color: #ddd;
 }
+
+td.fullonly {
+    color: #88f;
+}

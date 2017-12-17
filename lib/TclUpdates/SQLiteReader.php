@@ -117,13 +117,22 @@ class SQLiteReader
         return $result;
     }
 
-    public function getAllVersionsForRef($ref = null)
+    public function getAllVersionsForRef($ref = null, $which = self::BOTH)
     {
         $sql = 'SELECT fv, tv FROM updates u LEFT JOIN files f ON u.file_sha1=f.sha1';
+        $where_arr = array();
         $params_arr = array();
         if (!is_null($ref)) {
-            $sql .= ' WHERE curef=?';
+            $where_arr[] = 'curef=?';
             $params_arr[] = $ref;
+        }
+        if ($which == self::OTA_ONLY) {
+            $where_arr[] = 'fv IS NOT null';
+        } elseif ($which == self::FULL_ONLY) {
+            $where_arr[] = 'fv IS null';
+        }
+        if (count($where_arr) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $where_arr);
         }
         $stmt = $this->pdo->prepare($sql);
         $ok = $stmt->execute($params_arr);

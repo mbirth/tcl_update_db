@@ -33,9 +33,14 @@ foreach ($allVars as $family => $models) {
         foreach ($variants as $ref => $name) {
             echo '<tr><td class="ref">' . $ref . '</td>';
             $refVersions = $db->getAllVersionsForRef($ref);
+            $allOta      = $db->getAllVersionsForRef($ref, $db::OTA_ONLY);
             foreach ($allVersions as $v) {
                 if (in_array($v, $refVersions, true)) {
-                    echo '<td>' . $v . '</td>';
+                    if (in_array($v, $allOta)) {
+                        echo '<td>' . $v . '</td>';
+                    } else {
+                        echo '<td class="fullonly">' . $v . '</td>';
+                    }
                 } else {
                     echo '<td class="empty">- - -</td>';
                 }
