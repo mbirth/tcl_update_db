@@ -64,6 +64,7 @@ INSERT INTO "devices" ("ref", "modelId", "name") VALUES
   ("PRD-63116-044", 1, ""),
   ("PRD-63116-047", 1, "Black KEYone"),
   ("PRD-63116-051", 1, "Black KEYone"),
+  ("PRD-63116-055", 1, "Black KEYone"),
   ("PRD-63117-003", 2, "Unlocked UK"),
   ("PRD-63117-011", 2, "Unlocked EMEA"),
   ("PRD-63117-015", 2, "NL, Belgium"),
