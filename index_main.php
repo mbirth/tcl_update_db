@@ -31,7 +31,13 @@ foreach ($allVars as $family => $models) {
         $allVersions = $db->getAllVersionsForModel($model);
         echo '<table><tbody>';
         foreach ($variants as $ref => $name) {
-            echo '<tr><td class="ref">' . $ref . '</td>';
+            echo '<tr><td class="ref">';
+            if (mb_strlen($name) > 0) {
+                echo '<abbr title="' . $name . '">' . $ref . '</abbr>';
+            } else {
+                echo $ref;
+            }
+            echo '</td>';
             $refVersions = $db->getAllVersionsForRef($ref);
             $allOta      = $db->getAllVersionsForRef($ref, $db::OTA_ONLY);
             foreach ($allVersions as $v) {
