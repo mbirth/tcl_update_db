@@ -71,6 +71,20 @@ class SQLiteReader
         return $result;
     }
 
+    public function getAllVariantsFlat()
+    {
+        $sql = 'SELECT f.name AS family, m.name AS model, d.ref, d.name AS variant FROM families f LEFT JOIN models m ON f.familyId=m.familyId LEFT JOIN devices d ON m.modelId=d.modelId;';
+        $sqlresult = $this->pdo->query($sql);
+        $result = array();
+        foreach ($sqlresult->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+            $result[$row['ref']] = $row['family'] . ' ' . $row['model'];
+            if (strlen($row['variant'])>0) {
+                $result[$row['ref']] .= ' (' . $row['variant'] . ')';
+            }
+        }
+        return $result;
+    }
+
     public function getAllUpdates($ref, $which = self::BOTH)
     {
         $sql = 'SELECT * FROM updates u LEFT JOIN files f ON u.file_sha1=f.sha1 WHERE curef=?';
@@ -97,6 +111,9 @@ class SQLiteReader
         $stmt = $this->pdo->prepare($sql);
         $ok = $stmt->execute(array($ref));
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        if (count($result) == 1) {
+            $result = reset($result);
+        }
         return $result;
     }
 
