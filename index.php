@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $type = 'OTA (from ' . $g->fv . ')';
             }
             $data = array(
-                'content' => 'New ' . $type . ' update for ' . $g->ref . ' found: ' . $g->tv,
+                'content' => 'New ' . $type . ' update for ' . $g->curef . ' found: ' . $g->tv,
             );
             $options = array(
                 'http' => array(
