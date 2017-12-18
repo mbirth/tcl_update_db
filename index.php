@@ -42,6 +42,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($g->tv) {
         $sqlw = new SQLiteWriter();
         $result = $sqlw->addGotu($g, $file_date);
+        if ($result !== false) {
+            $config = parse_ini_file(__DIR__ . '/config.ini');
+            $type = 'FULL';
+            if ($g->fv) {
+                $type = 'OTA (from ' . $g->fv . ')';
+            }
+            $data = array(
+                'content' => 'New ' . $type . ' update for ' . $g->ref . ' found: ' . $g->tv,
+            );
+            $options = array(
+                'http' => array(
+                    'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+                    'method' => 'POST',
+                    'content' => http_build_query($data),
+                ),
+            );
+            $ctx = stream_context_create($options);
+            $notify_ok = file_get_contents($config['NOTIFY_WEBHOOK'], false, $ctx);
+        }
         // I don't care if we can use the data or not. Maybe we can use it later (backup copy).
     }
 
