@@ -1,13 +1,13 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__ . '/lib/autoloader.php';
+require_once __DIR__ . '/../lib/autoloader.php';
 
 use \TclUpdates\GotuObject;
 use \TclUpdates\XmlParser;
 use \TclUpdates\SQLiteWriter;
 
-$bkup_dir = __DIR__ . '/data/';
+$bkup_dir = __DIR__ . '/../data/';
 
 $file_list = glob($bkup_dir . '*.xml');
 $sqlw = new SQLiteWriter();

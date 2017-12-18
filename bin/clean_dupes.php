@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-$bkup_dir = __DIR__ . '/data/';
+$bkup_dir = __DIR__ . '/../data/';
 
 $file_list = glob($bkup_dir . '*.xml');
 

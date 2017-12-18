@@ -9,7 +9,7 @@ class SQLiteWriter
 
     public function __construct()
     {
-        $this->dbFile = 'otadb.db3';
+        $this->dbFile = __DIR__ . '/../../otadb.db3';
         $this->pdo = new \PDO('sqlite:' . $this->dbFile);
         if ($this->pdo === false) {
             return false;

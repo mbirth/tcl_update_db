@@ -1,0 +1,2 @@
+SYNC_REMOTE_DIR=myhost.example.com:/var/www/htdocs/
+NOTIFY_WEBHOOK=https://discordapp.com/api/webhooks/123456789012345678/aZZbGdefRghFTijgg6klmnXoIp--3qrsPD5L2t_Qwx0EyLzU-123ABCkk578Dq2d1GEJ
