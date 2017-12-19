@@ -33,7 +33,7 @@ class SQLiteReader
 
     public function getAllKnownRefs()
     {
-        $sql = 'SELECT DISTINCT ref FROM devices ORDER BY ref;';
+        $sql = 'SELECT DISTINCT curef FROM devices ORDER BY curef;';
         $sqlresult = $this->pdo->query($sql);
         $result = array();
         foreach ($sqlresult as $row) {
@@ -52,13 +52,13 @@ class SQLiteReader
 
     public function getAllVariants()
     {
-        $sql = 'SELECT f.name, m.name, d.ref, d.name FROM families f LEFT JOIN models m ON f.familyId=m.familyId LEFT JOIN devices d ON m.modelId=d.modelId;';
+        $sql = 'SELECT f.name, m.name, d.curef, d.name FROM families f LEFT JOIN models m ON f.familyId=m.familyId LEFT JOIN devices d ON m.modelId=d.modelId;';
         $sqlresult = $this->pdo->query($sql);
         $result = array();
         foreach ($sqlresult as $row) {
             $family = $row[0];
             $model  = $row[1];
-            $ref = $row[2];
+            $curef = $row[2];
             $variant = $row[3];
             if (!isset($result[$family])) {
                 $result[$family] = array();
@@ -66,26 +66,26 @@ class SQLiteReader
             if (!isset($result[$family][$model])) {
                 $result[$family][$model] = array();
             }
-            $result[$family][$model][$ref] = $variant;
+            $result[$family][$model][$curef] = $variant;
         }
         return $result;
     }
 
     public function getAllVariantsFlat()
     {
-        $sql = 'SELECT f.name AS family, m.name AS model, d.ref, d.name AS variant FROM families f LEFT JOIN models m ON f.familyId=m.familyId LEFT JOIN devices d ON m.modelId=d.modelId;';
+        $sql = 'SELECT f.name AS family, m.name AS model, d.curef, d.name AS variant FROM families f LEFT JOIN models m ON f.familyId=m.familyId LEFT JOIN devices d ON m.modelId=d.modelId;';
         $sqlresult = $this->pdo->query($sql);
         $result = array();
         foreach ($sqlresult->fetchAll(\PDO::FETCH_ASSOC) as $row) {
-            $result[$row['ref']] = $row['family'] . ' ' . $row['model'];
+            $result[$row['curef']] = $row['family'] . ' ' . $row['model'];
             if (strlen($row['variant'])>0) {
-                $result[$row['ref']] .= ' (' . $row['variant'] . ')';
+                $result[$row['curef']] .= ' (' . $row['variant'] . ')';
             }
         }
         return $result;
     }
 
-    public function getAllUpdates($ref, $which = self::BOTH)
+    public function getAllUpdates($curef, $which = self::BOTH)
     {
         $sql = 'SELECT * FROM updates u LEFT JOIN files f ON u.file_sha1=f.sha1 WHERE curef=?';
         if ($which == self::OTA_ONLY) {
@@ -94,12 +94,12 @@ class SQLiteReader
             $sql .= ' AND fv IS null';
         }
         $stmt = $this->pdo->prepare($sql);
-        $ok = $stmt->execute(array($ref));
+        $ok = $stmt->execute(array($curef));
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getLatestUpdate($ref, $which = self::BOTH)
+    public function getLatestUpdate($curef, $which = self::BOTH)
     {
         $sql = 'SELECT * FROM updates u LEFT JOIN files f ON u.file_sha1=f.sha1 WHERE curef=?';
         if ($which == self::OTA_ONLY) {
@@ -109,7 +109,7 @@ class SQLiteReader
         }
         $sql .= ' ORDER BY tv DESC, fv DESC LIMIT 1';
         $stmt = $this->pdo->prepare($sql);
-        $ok = $stmt->execute(array($ref));
+        $ok = $stmt->execute(array($curef));
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         if (count($result) == 1) {
             $result = reset($result);
@@ -117,14 +117,14 @@ class SQLiteReader
         return $result;
     }
 
-    public function getAllVersionsForRef($ref = null, $which = self::BOTH)
+    public function getAllVersionsForRef($curef = null, $which = self::BOTH)
     {
         $sql = 'SELECT fv, tv FROM updates u LEFT JOIN files f ON u.file_sha1=f.sha1';
         $where_arr = array();
         $params_arr = array();
-        if (!is_null($ref)) {
+        if (!is_null($curef)) {
             $where_arr[] = 'curef=?';
-            $params_arr[] = $ref;
+            $params_arr[] = $curef;
         }
         if ($which == self::OTA_ONLY) {
             $where_arr[] = 'fv IS NOT null';
@@ -151,7 +151,7 @@ class SQLiteReader
 
     public function getAllVersionsForModel($model)
     {
-        $sql = 'SELECT fv, tv FROM models m LEFT JOIN devices d ON m.modelId=d.modelId LEFT JOIN updates u ON d.ref=u.curef LEFT JOIN files f ON u.file_sha1=f.sha1 WHERE m.name=?';
+        $sql = 'SELECT fv, tv FROM models m LEFT JOIN devices d ON m.modelId=d.modelId LEFT JOIN updates u ON d.curef=u.curef LEFT JOIN files f ON u.file_sha1=f.sha1 WHERE m.name=?';
         $stmt = $this->pdo->prepare($sql);
         $ok = $stmt->execute(array($model));
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
