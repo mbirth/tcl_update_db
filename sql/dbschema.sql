@@ -19,6 +19,11 @@ CREATE TABLE "devices" (
   "name" TEXT   -- e.g. Unlocked USA, Black KEYone
 );
 
+CREATE VIEW "full_device_names" AS
+  SELECT * FROM "families" f
+  LEFT JOIN "models" m ON m.familyId=f.familyId
+  LEFT JOIN "devices" d ON d.modelId=m.modelId;
+
 -- we only care about the first file for now
 CREATE TABLE "files" (
   "sha1" TEXT UNIQUE PRIMARY KEY,   -- checksum of file
@@ -50,3 +55,7 @@ CREATE UNIQUE INDEX "index_updates" ON "updates" (
   "fwId",
   "file_id"
 );
+
+CREATE VIEW "updates_files" AS
+  SELECT * FROM "updates" u
+  LEFT JOIN "files" f ON u.file_sha1=f.sha1;
