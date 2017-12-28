@@ -9,6 +9,7 @@ table td+td {
 
 td {
     font-family: monospace;
+    white-space: nowrap;
 }
 
 td.ref {
