@@ -56,7 +56,7 @@ foreach ($allVars as $family => $models) {
                     if (in_array($v, $allOta)) {
                         echo '<td>' . $v . '</td>';
                     } else {
-                        echo '<td class="fullonly">' . $v . '</td>';
+                        echo '<td class="fullonly mdc-theme--secondary-dark">' . $v . '</td>';
                     }
                 } else {
                     echo '<td class="empty">- - -</td>';
