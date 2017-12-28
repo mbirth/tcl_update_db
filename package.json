@@ -1,0 +1,13 @@
+{
+  "name": "tcl_update_db",
+  "version": "1.0",
+  "description": "Web based database for (Android) updates of TCL devices.",
+  "homepage": "https://github.com/mbirth/tcl_update_db",
+  "repository": {
+    "type": "git",
+    "url": "mbirth/tcl_update_db"
+  },
+  "dependencies": {
+    "material-components-web": "^0.27.0"
+  }
+}

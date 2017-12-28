@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BlackBerry/TCL Firmware List</title>
-    <link rel="stylesheet" href="assets/style.css"/>
+  <title>BlackBerry/TCL Firmware List</title>
+  <link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css"/>
+  <link rel="stylesheet" href="assets/material-icons.css"/>
+  <link rel="stylesheet" href="assets/style.css"/>
 </head>
-<body>
+<body class="mdc-typography">
+  <header class="mdc-toolbar mdc-toolbar--fixed">
+    <div class="mdc-toolbar__row">
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+        <span class="mdc-toolbar__title">BlackBerry/TCL Firmware List</span>
+      </section>
+    </div>
+  </header>
+  <main>
+    <div class="mdc-toolbar-fixed-adjust"></div>
 <?php
 
 require_once __DIR__ . '/lib/autoloader.php';
@@ -57,5 +68,8 @@ foreach ($allVars as $family => $models) {
     }
 }
 ?>
+  </main>
+  <script src="node_modules/material-components-web/dist/material-components-web.js"></script>
+  <script>window.mdc.autoInit()</script>
 </body>
 </html>
