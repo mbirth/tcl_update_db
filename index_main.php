@@ -7,24 +7,6 @@
   <link rel="stylesheet" href="assets/style.css"/>
 </head>
 <body class="mdc-typography">
-  <header class="mdc-toolbar mdc-toolbar--fixed">
-    <div class="mdc-toolbar__row">
-      <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit mdc-toolbar__section--align-start">
-        <span class="mdc-toolbar__title">BlackBerry/TCL Firmware List</span>
-      </section>
-      <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
-        <div>
-          <nav id="tab-bar" class="mdc-tab-bar mdc-tab-bar--indicator-accent">
-            <a class="mdc-tab mdc-tab--active" href="#keyone" data-panel="family-keyone">KEYone</a>
-            <a class="mdc-tab" href="#motion" data-panel="family-motion">Motion</a>
-            <span class="mdc-tab-bar__indicator"></span>
-          </nav>
-        </div>
-      </section>
-    </div>
-  </header>
-  <main>
-    <div class="mdc-toolbar-fixed-adjust"></div>
 <?php
 
 require_once __DIR__ . '/lib/autoloader.php';
@@ -44,6 +26,34 @@ if (count($unknowns) > 0) {
         'Variants' => $variants,
     );
 }
+
+$families = array_keys($allVars);
+
+?>
+  <header class="mdc-toolbar mdc-toolbar--fixed">
+    <div class="mdc-toolbar__row">
+      <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit mdc-toolbar__section--align-start">
+        <span class="mdc-toolbar__title">BlackBerry/TCL Firmware List</span>
+      </section>
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+        <div>
+          <nav id="tab-bar" class="mdc-tab-bar mdc-tab-bar--indicator-accent">
+<?php
+
+foreach ($families as $i => $family) {
+    echo '<a class="mdc-tab' . (($i==0)?' mdc-tab--active':'') . '" href="#' . strtolower($family) . '" data-panel="family-' . strtolower($family) . '">' . $family . '</a>' . PHP_EOL;
+}
+
+?>
+            <span class="mdc-tab-bar__indicator"></span>
+          </nav>
+        </div>
+      </section>
+    </div>
+  </header>
+  <main>
+    <div class="mdc-toolbar-fixed-adjust"></div>
+<?php
 
 foreach ($allVars as $family => $models) {
     echo '<div id="family-' . strtolower($family) . '" class="panel" role="tabpanel">';
