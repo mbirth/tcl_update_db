@@ -8,7 +8,11 @@ $ansi_updel = $ansi_csi . 'F' . $ansi_csi . 'K';
 
 echo 'Reading file list ...';
 $file_list = glob($bkup_dir . '*.xml');
-echo ' OK' . PHP_EOL;
+
+$num_total = count($file_list);
+$num_deleted = 0;
+
+echo 'found ' . $num_total . ' files.' . PHP_EOL;
 
 echo 'Searching for duplicates ...' . PHP_EOL . PHP_EOL;
 
@@ -23,6 +27,7 @@ foreach ($file_list as $i => $file) {
         if (md5_file($file) == md5_file($bkup_dir . $old_file)) {
             echo $ansi_updel . 'Duplicate file: ' . $filename . ' (first: ' . $old_file . ')' . PHP_EOL . PHP_EOL;
             unlink($file);
+            $num_deleted++;
             continue;
         }
         echo $ansi_updel . 'Possible SHA1 collision?' . PHP_EOL . PHP_EOL;
@@ -32,5 +37,5 @@ foreach ($file_list as $i => $file) {
     flush();
 }
 
-echo count($file_list) . ' files done.' . PHP_EOL;
+echo count($file_list) . ' files processed. ' . $num_deleted . ' deleted. ' . ($num_total - $num_deleted) . ' left.'  . PHP_EOL;
 
