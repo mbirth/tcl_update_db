@@ -25,3 +25,57 @@ document.addEventListener 'DOMContentLoaded', (event) ->
         activatePanel 'family-' + hash.substring 1
     else
         activatePanel 'family-keyone'
+
+    window.showTooltip = (event) ->
+        tt = document.querySelector('#tooltip')
+        tt_title = document.querySelector('#tooltip-title')
+        tt_text  = document.querySelector('#tooltip-text')
+
+        ref = event.target.parentNode.dataset.ref
+        ver = event.target.innerText
+
+        tt_title.innerHTML = ver
+        tt_text.innerHTML  = "for #{ref}"
+
+
+        # Show tooltip
+        tt.style.visibility = 'hidden'
+        tt.style.display = 'block'
+        positionTooltip event.clientX + window.scrollX, event.clientY + window.scrollY
+        tt.style.visibility = 'visible'
+
+    window.positionTooltip = (mouseX, mouseY) ->
+        tooltip = document.querySelector '#tooltip'
+
+        #pageHeight = document.documentElement.getBoundingClientRect().height
+        viewportBottom = document.documentElement.clientHeight + document.documentElement.scrollTop
+        viewportRight  = document.documentElement.clientWidth + document.documentElement.scrollLeft
+        cursorOffset = 20
+        tooltipHeight = tooltip.clientHeight
+        tooltipWidth  = tooltip.clientWidth
+
+        #console.log('Cursor: %o, Planned bottom: %o, Viewport bottom: %o', mouseY, mouseY+cursorOffset+tooltipHeight, viewportBottom)
+
+        # Check if tooltip is outside bottom of document
+        if mouseY + cursorOffset + tooltipHeight >= viewportBottom
+            # show tooltip ABOVE cursor
+            tooltip.style.top  = (mouseY - cursorOffset - tooltipHeight) + 'px'
+        else
+            # show tooltip below cursor
+            tooltip.style.top  = (mouseY + cursorOffset) + 'px'
+
+        if mouseX + cursorOffset + tooltipWidth >= viewportRight
+            # show tooltip LEFT of cursor
+            tooltip.style.left = (mouseX - cursorOffset - tooltipWidth) + 'px'
+        else
+            # show tooltip right of cursor
+            tooltip.style.left = (mouseX + cursorOffset) + 'px'
+
+    versionitems = document.querySelectorAll '.version'
+    for vi in versionitems
+        vi.addEventListener 'mousemove', (event) ->
+            positionTooltip event.clientX + window.scrollX, event.clientY + window.scrollY
+        vi.addEventListener 'mouseover', (event) ->
+            showTooltip event
+        vi.addEventListener 'mouseout', (event) ->
+            document.querySelector('#tooltip').style.display = 'none'
