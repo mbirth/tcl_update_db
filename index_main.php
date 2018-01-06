@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css"/>
   <link rel="stylesheet" href="assets/material-icons.css"/>
   <link rel="stylesheet" href="assets/style.css"/>
+  <script type="text/javascript" src="node_modules/material-components-web/dist/material-components-web.js"></script>
+  <script type="text/javascript" src="assets/main.js"></script>
 </head>
 <body class="mdc-typography">
 <?php
@@ -90,7 +92,5 @@ foreach ($allVars as $family => $models) {
 }
 ?>
   </main>
-  <script type="text/javascript" src="node_modules/material-components-web/dist/material-components-web.js"></script>
-  <script type="text/javascript" src="assets/main.js"></script>
 </body>
 </html>
