@@ -91,36 +91,6 @@ foreach ($allVars as $family => $models) {
 ?>
   </main>
   <script type="text/javascript" src="node_modules/material-components-web/dist/material-components-web.js"></script>
-  <script type="text/javascript">
-    window.mdc.autoInit();
-    window.tabBar = new mdc.tabs.MDCTabBar(document.querySelector('#tab-bar'));
-
-    function activatePanel(panelId)
-    {
-        var allPanels = document.querySelectorAll('.panel');
-        for (var i=0; i<allPanels.length; i++) {
-            var panel = allPanels[i];
-            if (panel.id == panelId) {
-                tabBar.activeTabIndex = i;
-            }
-            panel.style.display = (panel.id == panelId)?'block':'none';
-        }
-    }
-
-    window.tabBar.listen('MDCTabBar:change', function(t) {
-        var nthChildIndex = t.detail.activeTabIndex;
-        var tabId = t.srcElement.id;
-        var tab = document.querySelector('#' + tabId + ' .mdc-tab:nth-child(' + (nthChildIndex + 1) + ')');
-        var panelId = tab.dataset.panel;
-        activatePanel(panelId);
-    });
-
-    var hash = location.hash;
-    if (hash.length > 1) {
-        activatePanel('family-' + hash.substring(1));
-    } else {
-        activatePanel('family-keyone');
-    }
-  </script>
+  <script type="text/javascript" src="assets/main.js"></script>
 </body>
 </html>
