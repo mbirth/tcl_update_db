@@ -15,17 +15,28 @@ body {
     margin-top: 70px;
 }
 
+#tooltip {
+    background-color: white;
+    z-index: 200;
+    position: absolute;
+    display: none;
+}
+
+#tooltip h1 {
+    font-weight: bold;
+}
+
 table td+td {
     border-left: 1px dashed silver;
     text-align: center;
 }
 
-td {
+th, td {
     font-family: monospace;
     white-space: nowrap;
 }
 
-td.ref {
+th.ref {
     font-weight: bold;
 }
 

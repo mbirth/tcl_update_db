@@ -8,6 +8,7 @@
     "url": "mbirth/tcl_update_db"
   },
   "dependencies": {
+    "coffeescript": "^2.1.1",
     "material-components-web": "^0.27.0"
   }
 }

@@ -1,3 +1,5 @@
+/assets/*.js
+/assets/*.map
 /data/
 /node_modules/
 /config.ini

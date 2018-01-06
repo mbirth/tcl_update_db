@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css"/>
   <link rel="stylesheet" href="assets/material-icons.css"/>
   <link rel="stylesheet" href="assets/style.css"/>
+  <script type="text/javascript" src="node_modules/material-components-web/dist/material-components-web.js"></script>
+  <script type="text/javascript" src="assets/main.js"></script>
 </head>
 <body class="mdc-typography">
 <?php
@@ -62,22 +64,22 @@ foreach ($allVars as $family => $models) {
         $allVersions = $db->getAllVersionsForModel($model);
         echo '<table><tbody>';
         foreach ($variants as $ref => $name) {
-            echo '<tr><td class="ref">';
+            echo '<tr data-ref="' . $ref . '"><th class="ref">';
             if (mb_strlen($name) > 0) {
                 echo '<abbr title="' . $name . '">' . $ref . '</abbr>';
             } else {
                 echo $ref;
             }
-            echo '</td>';
+            echo '</th>';
             $refVersions = $db->getAllVersionsForRef($ref);
             $allOta      = $db->getAllVersionsForRef($ref, $db::OTA_ONLY);
             foreach ($allVersions as $v) {
                 if (in_array($v, $refVersions, true)) {
-                    if (in_array($v, $allOta)) {
-                        echo '<td>' . $v . '</td>';
-                    } else {
-                        echo '<td class="fullonly mdc-theme--secondary-dark">' . $v . '</td>';
+                    $moreClasses = '';
+                    if (!in_array($v, $allOta)) {
+                        $moreClasses = ' fullonly mdc-theme--secondary-dark';
                     }
+                    echo '<td class="version' . $moreClasses . '">' . $v . '</td>';
                 } else {
                     echo '<td class="empty">- - -</td>';
                 }
@@ -89,38 +91,14 @@ foreach ($allVars as $family => $models) {
     echo '</div>';
 }
 ?>
+    <div id="tooltip" class="mdc-card">
+      <section class="mdc-card__primary">
+        <h1 id="tooltip-title" class="mdc-card__title">Title</h1>
+      </section>
+      <section id ="tooltip-text" class="mdc-card__supporting-text">
+        Contents here.
+      </section>
+    </div>
   </main>
-  <script type="text/javascript" src="node_modules/material-components-web/dist/material-components-web.js"></script>
-  <script type="text/javascript">
-    window.mdc.autoInit();
-    window.tabBar = new mdc.tabs.MDCTabBar(document.querySelector('#tab-bar'));
-
-    function activatePanel(panelId)
-    {
-        var allPanels = document.querySelectorAll('.panel');
-        for (var i=0; i<allPanels.length; i++) {
-            var panel = allPanels[i];
-            if (panel.id == panelId) {
-                tabBar.activeTabIndex = i;
-            }
-            panel.style.display = (panel.id == panelId)?'block':'none';
-        }
-    }
-
-    window.tabBar.listen('MDCTabBar:change', function(t) {
-        var nthChildIndex = t.detail.activeTabIndex;
-        var tabId = t.srcElement.id;
-        var tab = document.querySelector('#' + tabId + ' .mdc-tab:nth-child(' + (nthChildIndex + 1) + ')');
-        var panelId = tab.dataset.panel;
-        activatePanel(panelId);
-    });
-
-    var hash = location.hash;
-    if (hash.length > 1) {
-        activatePanel('family-' + hash.substring(1));
-    } else {
-        activatePanel('family-keyone');
-    }
-  </script>
 </body>
 </html>
