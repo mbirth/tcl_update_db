@@ -11,6 +11,10 @@ body {
     font-family: sans-serif;
 }
 
+main {
+    overflow: scroll;
+}
+
 .panel {
     margin-top: 70px;
 }
