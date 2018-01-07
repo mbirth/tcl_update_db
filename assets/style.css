@@ -24,6 +24,7 @@ main {
     z-index: 200;
     position: absolute;
     display: none;
+    max-width: 70%;
 }
 
 #tooltip h1 {

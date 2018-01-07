@@ -38,9 +38,14 @@ document.addEventListener 'DOMContentLoaded', (event) ->
         #console.log("Meta: %o", meta)
         vermeta = meta['versions'][ver]
 
+        updateText = ''
         if vermeta['FULL'].length > 0
             fullmeta = vermeta['FULL'][0]
             fullInfo = "✔️ (first released: #{fullmeta['published_first']})"
+            if fullmeta['note']['en']
+                updateText = fullmeta['note']['en']
+                updateText = updateText.replace /\n/g, '<br/>'
+                #updateText += '<br/><br/>'
         else
             fullInfo = "❌"
 
@@ -56,16 +61,18 @@ document.addEventListener 'DOMContentLoaded', (event) ->
             toList = toList.join ', '
             updateInfo = "<strong>OTA possible to #{toList}</strong>"
         else
-            updateInfo = "No further OTA update."
+            updateInfo = "No OTA to future version."
 
         tt_title.innerHTML = ver
         tt_text.innerHTML  = """
-            for #{ref} - #{meta['variant']}<br/>
+            for #{ref}<br/>
+            #{meta['variant']}<br/>
             <br/>
             FULL: #{fullInfo}<br/>
             OTA: #{otaInfo}<br/>
+            #{updateInfo}<br/>
             <br/>
-            #{updateInfo}
+            #{updateText}
         """
 
 
