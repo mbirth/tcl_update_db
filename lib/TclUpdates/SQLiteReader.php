@@ -168,4 +168,17 @@ class SQLiteReader
         sort($version);
         return $version;
     }
+
+    public function getAllRefsForFile($sha1)
+    {
+        $sql = 'SELECT curef FROM updates u WHERE u.file_sha1=?';
+        $stmt = $this->pdo->prepare($sql);
+        $ok = $stmt->execute(array($sha1));
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $refs = array();
+        foreach ($result as $row) {
+            $refs[] = $row['curef'];
+        }
+        return $refs;
+    }
 }

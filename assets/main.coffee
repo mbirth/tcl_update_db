@@ -34,8 +34,39 @@ document.addEventListener 'DOMContentLoaded', (event) ->
         ref = event.target.parentNode.dataset.ref
         ver = event.target.innerText
 
+        meta = window.metadata[ref]
+        #console.log("Meta: %o", meta)
+        vermeta = meta['versions'][ver]
+
+        if vermeta['FULL'].length > 0
+            fullmeta = vermeta['FULL'][0]
+            fullInfo = "✔️ (first released: #{fullmeta['published_first']})"
+        else
+            fullInfo = "❌"
+
+        if vermeta['OTA'].length > 0
+            fromList = (v['fv'] for v in vermeta['OTA'])
+            fromList = fromList.join ', '
+            otaInfo = "✔️ (from #{fromList})"
+        else
+            otaInfo = "❌"
+
+        if vermeta['OTA_FROM'].length > 0
+            toList = (v['tv'] for v in vermeta['OTA_FROM'])
+            toList = toList.join ', '
+            updateInfo = "<strong>OTA possible to #{toList}</strong>"
+        else
+            updateInfo = "No further OTA update."
+
         tt_title.innerHTML = ver
-        tt_text.innerHTML  = "for #{ref}"
+        tt_text.innerHTML  = """
+            for #{ref} - #{meta['variant']}<br/>
+            <br/>
+            FULL: #{fullInfo}<br/>
+            OTA: #{otaInfo}<br/>
+            <br/>
+            #{updateInfo}
+        """
 
 
         # Show tooltip
@@ -71,11 +102,27 @@ document.addEventListener 'DOMContentLoaded', (event) ->
             # show tooltip right of cursor
             tooltip.style.left = (mouseX + cursorOffset) + 'px'
 
-    versionitems = document.querySelectorAll '.version'
-    for vi in versionitems
-        vi.addEventListener 'mousemove', (event) ->
-            positionTooltip event.clientX + window.scrollX, event.clientY + window.scrollY
-        vi.addEventListener 'mouseover', (event) ->
-            showTooltip event
-        vi.addEventListener 'mouseout', (event) ->
-            document.querySelector('#tooltip').style.display = 'none'
+    # Load metadata
+    metadata = {}
+    xhr = new XMLHttpRequest()
+    xhr.open('GET', 'json_updatedetails.php', true);
+    xhr.onreadystatechange = ->
+        if xhr.readyState is 4 and xhr.status is 200
+            window.metadata = JSON.parse xhr.responseText
+
+            # Add event listeners to all versions so tooltips start to work AFTER data was loaded
+            versionitems = document.querySelectorAll '.version'
+            for vi in versionitems
+                vi.addEventListener 'mousemove', (event) ->
+                    positionTooltip event.clientX + window.scrollX, event.clientY + window.scrollY
+                vi.addEventListener 'mouseover', (event) ->
+                    showTooltip event
+                vi.addEventListener 'mouseout', (event) ->
+                    document.querySelector('#tooltip').style.display = 'none'
+
+            snackbar = new mdc.snackbar.MDCSnackbar document.querySelector '.mdc-snackbar'
+            snackbar.show
+                message: 'Update details loaded. Hover a version number to see details.'
+                timeout: 5000
+
+    xhr.send()
