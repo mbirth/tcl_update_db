@@ -19,6 +19,10 @@ main {
     margin-top: 70px;
 }
 
+.nofiles {
+    color: #888;
+}
+
 #tooltip {
     background-color: white;
     z-index: 200;

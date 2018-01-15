@@ -75,11 +75,16 @@ foreach ($allVars as $family => $models) {
             echo '</th>';
             $refVersions = $db->getAllVersionsForRef($ref);
             $allOta      = $db->getAllVersionsForRef($ref, $db::OTA_ONLY);
+            $allFull     = $db->getAllVersionsForRef($ref, $db::FULL_ONLY);
             foreach ($allVersions as $v) {
                 if (in_array($v, $refVersions, true)) {
                     $moreClasses = '';
-                    if (!in_array($v, $allOta)) {
+                    if (!in_array($v, $allOta) && !in_array($v, $allFull)) {
+                        $moreClasses = ' nofiles';
+                    } elseif (!in_array($v, $allOta)) {
                         $moreClasses = ' fullonly mdc-theme--secondary-dark';
+                    } elseif (!in_array($v, $allFull)) {
+                        $moreClasses = ' otaonly mdc-theme--primary-dark';
                     }
                     echo '<td class="version' . $moreClasses . '">' . $v . '</td>';
                 } else {

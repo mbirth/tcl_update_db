@@ -139,7 +139,7 @@ class SQLiteReader
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $version = array();
         foreach ($result as $row) {
-            if (!is_null($row['fv'])) {
+            if (!is_null($row['fv']) && $which == self::BOTH) {
                 $version[] = $row['fv'];
             }
             $version[] = $row['tv'];
