@@ -4,6 +4,7 @@
   <meta charset="utf-8"/>
   <title>BlackBerry/TCL Firmware List</title>
   <meta name="viewport" content="width=device-width, initial-scale=0.8"/>
+  <meta name="theme-color" content="#1b5e20"/>
   <link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css"/>
   <link rel="stylesheet" href="assets/material-icons.css"/>
   <link rel="stylesheet" href="assets/style.css"/>
