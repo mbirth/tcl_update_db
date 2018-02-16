@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $g = GotuObject::fromXmlParser($xp);
     if ($g->tv) {
         $sqlw = new SQLiteWriter();
-        $result = $sqlw->addGotu($g, $file_date);
+        $result = $sqlw->addGotu($g);
         if ($result !== false) {
             $config = parse_ini_file(__DIR__ . '/config.ini');
             $type = 'FULL';
