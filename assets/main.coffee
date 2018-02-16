@@ -51,15 +51,25 @@ document.addEventListener 'DOMContentLoaded', (event) ->
 
         if vermeta['OTA'].length > 0
             fromList = (v['fv'] for v in vermeta['OTA'])
-            fromList = fromList.join ', '
-            otaInfo = "✔️ (from #{fromList})"
+            fromList = fromList.sort().reverse()
+            fromListText = fromList.join ', '
+            if fromList.length > 3
+                fromMore = fromList.length - 3
+                fromList = fromList[0..2]
+                fromListText = (fromList.join ', ') + " + #{fromMore} more"
+            otaInfo = "✔️ (from #{fromListText})"
         else
             otaInfo = "❌"
 
         if vermeta['OTA_FROM'].length > 0
             toList = (v['tv'] for v in vermeta['OTA_FROM'])
-            toList = toList.join ', '
-            updateInfo = "<strong>OTA possible to #{toList}</strong>"
+            toList = toList.sort().reverse()
+            toListText = toList.join ', '
+            if toList.length > 3
+                toMore = toList.length - 3
+                toList = toList[0..2]
+                toListText = (toList.join ', ') + " + #{toMore} more"
+            updateInfo = "<strong>OTA possible to #{toListText}</strong>"
         else
             updateInfo = "No OTA to future version."
 
