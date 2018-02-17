@@ -85,6 +85,21 @@ class SQLiteReader
         return $result;
     }
 
+    public function getAllVariantsByRef()
+    {
+        $sql = 'SELECT f.name AS family, m.name AS model, d.curef, d.name AS variant FROM families f LEFT JOIN models m ON f.familyId=m.familyId LEFT JOIN devices d ON m.modelId=d.modelId;';
+        $sqlresult = $this->pdo->query($sql);
+        $result = array();
+        foreach ($sqlresult->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+            $result[$row['curef']] = array(
+                'family' => $row['family'],
+                'model' => $row['model'],
+                'variant' => $row['variant'],
+            );
+        }
+        return $result;
+    }
+
     public function getAllUpdates($curef, $which = self::BOTH)
     {
         $sql = 'SELECT * FROM updates u LEFT JOIN files f ON u.file_sha1=f.sha1 WHERE curef=?';
@@ -95,6 +110,29 @@ class SQLiteReader
         }
         $stmt = $this->pdo->prepare($sql);
         $ok = $stmt->execute(array($curef));
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getAllUpdatesForFile($sha1)
+    {
+        $sql = 'SELECT * FROM updates u WHERE u.file_sha1=? ORDER BY pubDate ASC';
+        $stmt = $this->pdo->prepare($sql);
+        $ok = $stmt->execute(array($sha1));
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getAllFiles($which = self::BOTH)
+    {
+        $sql = 'SELECT * FROM files f';
+        if ($which == self::OTA_ONLY) {
+            $sql .= ' WHERE fv IS NOT null';
+        } elseif ($which == self::FULL_ONLY) {
+            $sql .= ' WHERE fv IS null';
+        }
+        $sql .= ' ORDER BY published_first DESC';
+        $stmt = $this->pdo->query($sql);
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
     }

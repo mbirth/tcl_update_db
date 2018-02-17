@@ -11,8 +11,12 @@ body {
     font-family: sans-serif;
 }
 
+body.timeline {
+    background-color: #eee;
+}
+
 main {
-    overflow: scroll;
+    overflow: auto;
 }
 
 .panel {
@@ -59,4 +63,39 @@ tr:hover {
 
 td.fullonly {
     color: #88f;
+}
+
+.release-card {
+    background-color: white;
+    border-radius: 12px 4px;
+    width: 80%;
+    margin: 20px auto;
+    padding: 12px;
+}
+
+.release-card .version {
+    font-weight: bold;
+    font-size: 1.5em;
+    display: table-cell;
+}
+
+.release-card .date {
+    display: table-cell;
+    padding-left: 2em;
+}
+
+.release-card .date span {
+    font-weight: bold;
+}
+
+.release-card .devices {
+    display: table-cell;
+    padding-left: 2em;
+}
+
+.release-card .devices span {
+    font-weight: bold;
+}
+
+.release-card .lastreleased {
 }
