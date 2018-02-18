@@ -27,9 +27,9 @@ document.addEventListener 'DOMContentLoaded', (event) ->
         activatePanel 'family-keyone'
 
     window.showTooltip = (event) ->
-        tt = document.querySelector('#tooltip')
-        tt_title = document.querySelector('#tooltip-title')
-        tt_text  = document.querySelector('#tooltip-text')
+        tt = document.querySelector '#tooltip'
+        tt_title = document.querySelector '#tooltip-title'
+        tt_text  = document.querySelector '#tooltip-text'
 
         ref = event.target.parentNode.dataset.ref
         ver = event.target.innerText

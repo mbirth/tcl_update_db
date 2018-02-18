@@ -100,10 +100,10 @@ foreach ($allVars as $family => $models) {
 }
 ?>
     <div id="tooltip" class="mdc-card">
-      <section class="mdc-card__primary">
-        <h1 id="tooltip-title" class="mdc-card__title">Title</h1>
+      <section class="tooltip-card__primary">
+        <h1 id="tooltip-title" class="tooltip-card__title mdc-typography--title">Title</h1>
       </section>
-      <section id ="tooltip-text" class="mdc-card__supporting-text">
+      <section id ="tooltip-text" class="tooltip-card__supporting-text">
         Contents here.
       </section>
     </div>

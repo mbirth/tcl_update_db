@@ -7,6 +7,18 @@
     --mdc-theme-secondary-dark: #c17900;
 }
 
+.mdc-toolbar .mdc-tab {
+    color: var(--mdc-theme-text-secondary-on-primary, rgba(255, 255, 255, 0.7));
+}
+
+.mdc-toolbar .mdc-tab--active {
+    color: var(--mdc-theme-text-primary-on-primary, white);
+}
+
+.mdc-toolbar .mdc-tab-bar__indicator {
+    background-color: var(--mdc-theme-secondary, #ff4081);
+}
+
 body {
     font-family: sans-serif;
 }
@@ -35,8 +47,17 @@ main {
     max-width: 70%;
 }
 
+.tooltip-card__primary {
+    padding: 1rem;
+}
+
+.tooltip-card__supporting-text {
+    padding: 0 1rem 8px 1rem;
+}
+
 #tooltip h1 {
     font-weight: bold;
+    margin: 0;
 }
 
 table td+td {
