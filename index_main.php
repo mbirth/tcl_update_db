@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="assets/style.css"/>
   <script type="text/javascript" src="node_modules/material-components-web/dist/material-components-web.js"></script>
   <script type="text/javascript" src="assets/main.js"></script>
+  <script type="text/javascript" src="assets/menu.js"></script>
 </head>
 <body class="mdc-typography">
 <?php
@@ -38,6 +39,7 @@ $families = array_keys($allVars);
   <header class="mdc-toolbar mdc-toolbar--fixed">
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit mdc-toolbar__section--align-start">
+        <button class="material-icons mdc-toolbar__menu-icon">menu</button>
         <span class="mdc-toolbar__title">BlackBerry/TCL Firmware List</span>
       </section>
       <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
@@ -56,6 +58,9 @@ foreach ($families as $i => $family) {
       </section>
     </div>
   </header>
+
+  <?php include 'menu.php'; ?>
+
   <main>
     <div class="mdc-toolbar-fixed-adjust"></div>
 <?php
@@ -116,5 +121,22 @@ foreach ($allVars as $family => $models) {
     </div>
 
   </main>
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//analytics.birth-online.de/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '4']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//analytics.birth-online.de/piwik.php?idsite=4&rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
 </body>
 </html>

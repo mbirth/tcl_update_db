@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="assets/material-icons.css"/>
   <link rel="stylesheet" href="assets/style.css"/>
   <script type="text/javascript" src="node_modules/material-components-web/dist/material-components-web.js"></script>
+  <script type="text/javascript" src="assets/menu.js"></script>
 </head>
 <body class="mdc-typography timeline">
 <?php
@@ -35,10 +36,14 @@ if (count($unknowns) > 0) {
   <header class="mdc-toolbar mdc-toolbar--fixed">
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit mdc-toolbar__section--align-start">
+        <button class="material-icons mdc-toolbar__menu-icon">menu</button>
         <span class="mdc-toolbar__title">BlackBerry/TCL Firmware Timeline</span>
       </section>
     </div>
   </header>
+
+  <?php include 'menu.php'; ?>
+
   <main>
     <div class="mdc-toolbar-fixed-adjust"></div>
 <?php
