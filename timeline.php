@@ -53,10 +53,17 @@ foreach ($allfiles as $file) {
     $updates = $db->getAllUpdatesForFile($file['sha1']);
     $validRefs = array();
     $validDevs = array();
+    $firstSeen = new DateTime();
+    $firstSeen->setTimezone(new DateTimeZone('CET'));
     foreach ($updates as $u) {
         $dev = $allVars[$u['curef']];
         $validRefs[] = $u['curef'];
         $validDevs[] = $dev['family'] . ' ' . $dev['model'];
+        $firstSeenDate = new DateTime($u['seenDate']);
+        $firstSeenDate->setTimezone(new DateTimeZone('CET'));
+        if ($firstSeenDate < $firstSeen) {
+            $firstSeen = $firstSeenDate;
+        }
     }
     $validDevs = array_unique($validDevs);
     sort($validDevs);
@@ -74,7 +81,7 @@ foreach ($allfiles as $file) {
     echo '</div>';
     echo '<div class="date"><span>' . $date->format('Y-m-d') . '</span> ' . $date->format('H:i.s') . ' CET</div>';
     echo '<div class="devices"><span>' . implode('</span> / <span>', $validDevs) . '</span></div>';
-    echo '<div class="lastreleased">Last released: <span>' . $dateLast->format('Y-m-d H:i.s') . '</span></div>';
+    echo '<div class="lastreleased">Last released: <span>' . $dateLast->format('Y-m-d H:i.s') . '</span> (first seen in the wild: <span>' . $firstSeen->format('Y-m-d H:i.s') . '</span>)</div>';
     echo '<div class="validfor">Valid for (order of release): <span>' . implode('</span>, <span>', $validRefs) . '</span></div>';
     #print_r($file);
     #print_r($updates);
