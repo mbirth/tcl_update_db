@@ -43,6 +43,7 @@ CREATE TABLE "updates" (
   "update_desc" TEXT,
   "svn" TEXT,      -- version info from <SVN> field
   "seenDate" INTEGER,  -- date added to db
+  "revoked" INTEGER,   -- (bool) 1 = firmware revoked
   "pubDate" INTEGER,   -- published date
   "publisher" TEXT,    -- publisher
   "num_files" INTEGER, -- number of files total
