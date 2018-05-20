@@ -5,6 +5,7 @@
   <title>BlackBerry/TCL Firmware Timeline</title>
   <meta name="viewport" content="width=device-width, initial-scale=0.8"/>
   <meta name="theme-color" content="#1b5e20"/>
+  <link rel="alternate" type="application/rss+xml" title="BlackBerry/TCL Firmware Timeline Feed" href="rss.php"/>
   <link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css"/>
   <link rel="stylesheet" href="assets/material-icons.css"/>
   <link rel="stylesheet" href="assets/style.css"/>
