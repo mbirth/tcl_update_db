@@ -55,6 +55,7 @@ foreach ($refs as $ref) {
             'num_missing' => count($missing_froms),
             'missing_froms' => $missing_froms,
             'latest_ota' => $latest_ota,
+            'update_map' => $update_map,
         );
     }
 }
