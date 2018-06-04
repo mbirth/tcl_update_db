@@ -2,6 +2,7 @@
 $menu_items = array(
     array('index.php', 'view_agenda', 'Version Table'),
     array('timeline.php', 'view_list', 'Version Timeline'),
+    array('rss.php', 'rss_feed', 'RSS Feed'),
     '---',
     array('https://github.com/mbirth/tcl_update_db', 'code', 'GitHub Source'),
 );
