@@ -1,4 +1,4 @@
-document.addEventListener 'DOMContentLoaded', (event) -> 
+document.addEventListener 'DOMContentLoaded', (event) ->
 
     window.mdc.autoInit()
     window.tabBar = new mdc.tabs.MDCTabBar document.querySelector '#tab-bar'
@@ -114,7 +114,10 @@ document.addEventListener 'DOMContentLoaded', (event) ->
 
         if mouseX + cursorOffset + tooltipWidth >= viewportRight
             # show tooltip LEFT of cursor
-            tooltip.style.left = (mouseX - cursorOffset - tooltipWidth) + 'px'
+            leftPos = mouseX - cursorOffset - tooltipWidth
+            if leftPos < 0
+                leftPos = 0
+            tooltip.style.left = leftPos + 'px'
         else
             # show tooltip right of cursor
             tooltip.style.left = (mouseX + cursorOffset) + 'px'
