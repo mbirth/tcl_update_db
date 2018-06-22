@@ -101,6 +101,7 @@ class SQLiteWriter
             'note' => array(
                 'en' => $g->description_en,
                 'ja' => $g->description_ja,
+                'ko' => $g->description_ko,
                 'zh' => $g->description_zh,
             ),
             'pubDate' => $g->time,

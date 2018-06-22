@@ -24,6 +24,7 @@ class XmlParser
         'file_version' => '//FILESET/FILE[1]/FILE_VERSION',
         'description_en' => '//DESCRIPTION/en',
         'description_ja' => '//DESCRIPTION/ja',
+        'description_ko' => '//DESCRIPTION/ko',
         'description_zh' => '//DESCRIPTION/zh',
     );
 
