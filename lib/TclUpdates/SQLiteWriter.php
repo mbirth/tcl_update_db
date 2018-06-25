@@ -39,7 +39,7 @@ class SQLiteWriter
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $pubFirst = '2099-12-31';
         $pubLast  = '1970-01-01';
-        $note = array('en' => null, 'ja' => null, 'zh' => null);
+        $note = array('en' => null, 'ja' => null, 'ko' => null, 'zh' => null);
         if (count($result) > 0) {
             $pubFirst = $result[0]['published_first'];
             $pubLast  = $result[0]['published_last'];
