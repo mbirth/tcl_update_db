@@ -68,6 +68,14 @@ foreach ($families as $i => $family) {
 
 foreach ($allVars as $family => $models) {
     echo '<div id="family-' . strtolower($family) . '" class="panel" role="tabpanel">';
+
+    echo '  <div class="mdc-card info-card">';
+    echo '    <div class="mdc-typography--body1">';
+    echo '      <div class="title"><span class="material-icons">info</span> How to find your CU Reference (PRD) number</div>';
+    echo '      <div>Open your phone dialer and enter this code: <tt>*#837837#</tt> (<tt>*#TESTER#</tt>).</div>';
+    echo '    </div>';
+    echo '  </div>';
+
     foreach ($models as $model => $variants) {
         echo '<h2>' . $family . ' ' . $model . '</h2>' . PHP_EOL;
         $allVersions = $db->getAllVersionsForModel($model);

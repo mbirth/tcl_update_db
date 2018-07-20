@@ -86,6 +86,28 @@ td.fullonly {
     color: #88f;
 }
 
+.info-card {
+    background-color: #ffe;
+    border-radius: 4px 4px;
+    width: 80%;
+    margin: 20px auto;
+    padding: 12px;
+}
+
+.info-card div {
+    font-size: 1.1em;
+}
+
+.info-card .title {
+    font-weight: bold;
+    font-size: 1.3em;
+    padding-bottom: 0.5em;
+}
+
+.info-card .material-icons {
+    vertical-align: top;
+}
+
 .release-card {
     background-color: white;
     border-radius: 12px 4px;
