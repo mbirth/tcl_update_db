@@ -58,6 +58,10 @@ document.addEventListener 'DOMContentLoaded', (event) ->
                 fromList = fromList[0..2]
                 fromListText = (fromList.join ', ') + " + #{fromMore} more"
             otaInfo = "✔️ (from #{fromListText})"
+            for v in vermeta['OTA']
+                if v['note']['en'] and updateText is ''
+                    updateText = '(' + v['fv'] + ' to ' + v['tv'] + ') '
+                    updateText += v['note']['en'].replace /\n/g, '<br/>'
         else
             otaInfo = "❌"
 
