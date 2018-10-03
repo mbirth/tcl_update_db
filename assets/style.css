@@ -142,3 +142,26 @@ td.fullonly {
 
 .release-card .lastreleased {
 }
+
+.app-main {
+    text-align: center;
+}
+
+.app-card {
+    background-color: white;
+    width: 200px;
+    margin: 20px 10px;
+    padding: 12px;
+    text-align: center;
+    display: inline-block;
+    word-break: break-word;
+}
+
+.app-card .app-name {
+    font-weight: bold;
+}
+
+.app-card .app-name a {
+    text-decoration: none;
+    color: black;
+}

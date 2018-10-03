@@ -4,6 +4,8 @@ $menu_items = array(
     array('timeline.php', 'view_list', 'Version Timeline'),
     array('rss.php', 'rss_feed', 'RSS Feed'),
     '---',
+    array('hubapps.php', 'apps', 'Hub Supported Apps'),
+    '---',
     array('https://github.com/mbirth/tcl_update_db', 'code', 'GitHub Source'),
 );
 $this_page = basename($_SERVER['SCRIPT_NAME']);
