@@ -1,5 +1,6 @@
 /assets/*.js
 /assets/*.map
+/assets/app_icons/orig/
 /data/
 /node_modules/
 /config.ini

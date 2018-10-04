@@ -16,6 +16,8 @@
 
 $appsList = [
     'com.google.android.apps.messaging' => 'Android Messages',
+    'com.google.android.dialer' => 'Android Phone',
+    'com.bbm.enterprise' => 'BBM Enterprise',
     'com.bbm' => 'BlackBerry Messenger',
     'com.contapps.android' => 'Contacts+',
     'com.discord' => 'Discord',
