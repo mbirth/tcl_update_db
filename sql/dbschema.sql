@@ -27,14 +27,14 @@ CREATE VIEW "full_device_names" AS
 -- we only care about the first file for now
 CREATE TABLE "files" (
   "sha1" TEXT UNIQUE PRIMARY KEY,   -- checksum of file
-  "file_name" TEXT,      -- filename of file
-  "file_size" INTEGER,   -- size
-  "type" TEXT,           -- FULL(4) or OTA(2) update
-  "fv" TEXT,             -- from version (only for OTA)
-  "tv" TEXT,             -- target version, e.g. AAQ302
-  "note" TEXT,           -- description of file (optional)
-  "published_first" INTEGER,   -- stamp of earliest pubdate
-  "published_last" INTEGER     -- stamp of latest pubdate
+  "file_name" TEXT,        -- filename of file
+  "file_size" INTEGER,     -- size
+  "type" TEXT,             -- FULL(4) or OTA(2) update
+  "fv" TEXT,               -- from version (only for OTA)
+  "tv" TEXT,               -- target version, e.g. AAQ302
+  "note" TEXT,             -- description of file (optional)
+  "published_first" TEXT,  -- ISO 8601 stamp of earliest pubdate
+  "published_last" TEXT    -- ISO 8601 stamp of latest pubdate
 );
 
 CREATE TABLE "updates" (
@@ -42,9 +42,9 @@ CREATE TABLE "updates" (
   "curef" TEXT,    -- PRD number
   "update_desc" TEXT,
   "svn" TEXT,      -- version info from <SVN> field
-  "seenDate" INTEGER,  -- date added to db
+  "seenDate" TEXT,     -- ISO 8601 date added to db
   "revoked" INTEGER,   -- (bool) 1 = firmware revoked
-  "pubDate" INTEGER,   -- published date
+  "pubDate" TEXT,      -- ISO 8601 published date
   "publisher" TEXT,    -- publisher
   "num_files" INTEGER, -- number of files total
   "fwId" TEXT,     -- <FW_ID> (CHANGES FOR THE SAME FILE_ID!!!) MAYBE MOVE TO update_map
