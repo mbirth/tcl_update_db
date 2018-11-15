@@ -57,6 +57,20 @@ CREATE UNIQUE INDEX "index_updates" ON "updates" (
   "file_id"
 );
 
+CREATE TABLE "changelog" (
+  "fv" TEXT,            -- from version or NULL
+  "tv" TEXT NOT NULL,   -- target version
+  "note_en" TEXT,       -- update note
+  "note_ja" TEXT,
+  "note_zh" TEXT,
+  "note_ko" TEXT
+);
+
+CREATE TABLE "versionmap" (
+  "curef" TEXT REFERENCES "devices" ("curef"),    -- PRD number
+  "tv" TEXT REFERENCES "changelog" ("tv")         -- version
+);
+
 CREATE VIEW "updates_files" AS
   SELECT * FROM "updates" u
   LEFT JOIN "files" f ON u.file_sha1=f.sha1;
