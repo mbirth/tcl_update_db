@@ -32,10 +32,10 @@ document.addEventListener 'DOMContentLoaded', (event) ->
         tt_text  = document.querySelector '#tooltip-text'
 
         ref = event.target.parentNode.dataset.ref
-        ver = event.target.innerText
+        ver = event.target.innerText.trim()
 
         meta = window.metadata[ref]
-        #console.log("Meta: %o", meta)
+        #console.log("Meta: %o (Ver: %o)", meta, ver)
         vermeta = meta['versions'][ver]
 
         updateText = ''
